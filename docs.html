@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Velaine documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root { --black: #121212; --gold: #c2a06a; --bronze: #7d5f33; --cream: #f3eee7; --line: #e3dbcf; --ink: #1c1a17; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font: 16px/1.7 "DM Sans", system-ui, sans-serif; }
+    header { background: var(--black); color: var(--cream); padding: 16px; }
+    header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    .brand { color: var(--cream); text-decoration: none; font: 500 24px/1 "Cormorant", Georgia, serif; letter-spacing: .18em; }
+    .brand span { color: var(--gold); }
+    nav a { color: #e9e2d6; text-decoration: none; font-size: 14px; margin-inline-start: 20px; }
+    nav a:hover { color: var(--gold); }
+    .wrap { max-width: 860px; margin: 0 auto; }
+    main { padding: 40px 16px 72px; }
+    h1, h2, h3 { font-family: "Cormorant", Georgia, serif; font-weight: 600; color: var(--black); line-height: 1.2; }
+    h1 { font-size: 44px; margin-top: 0; }
+    h2 { font-size: 30px; margin-top: 40px; border-top: 1px solid var(--line); padding-top: 24px; }
+    h3 { font-size: 22px; }
+    a { color: var(--bronze); }
+    code { background: #fff; border: 1px solid var(--line); padding: 1px 6px; font-size: 14px; }
+    pre code { display: block; padding: 12px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; background: #fff; font-size: 15px; display: block; overflow-x: auto; }
+    th, td { text-align: start; vertical-align: top; padding: 10px 12px; border: 1px solid var(--line); }
+    th { background: var(--black); color: var(--cream); font-weight: 600; }
+    blockquote { margin: 16px 0; padding: 12px 16px; border-inline-start: 3px solid var(--gold); background: #fff; }
+    img { max-width: 100%; }
+    .back { display: inline-block; margin-bottom: 24px; font-size: 14px; }
+    a:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a class="brand" href="./"><span>V</span> VELAINE</a>
+      <nav aria-label="Support">
+        <a href="docs.html">Documentation</a>
+        <a href="docs.html?p=faq">FAQ</a>
+        <a href="docs.html?p=support">Support policy</a>
+        <a href="./#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap">
+    <a class="back" href="docs.html">← All guides</a>
+    <article id="content" aria-live="polite">Loading…</article>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+  <script>
+    (async function () {
+      const page = (new URLSearchParams(location.search).get('p') || 'README').replace(/[^\w-]/g, '');
+      const src = page === 'support' ? 'SUPPORT.md' : 'docs/' + page + '.md';
+      const box = document.getElementById('content');
+      try {
+        const res = await fetch(src);
+        if (!res.ok) throw new Error(res.status);
+        box.innerHTML = marked.parse(await res.text());
+        // links between guides stay inside this viewer
+        box.querySelectorAll('a[href$=".md"], a[href*=".md#"]').forEach(a => {
+          const [file, hash] = a.getAttribute('href').split('#');
+          const name = file.split('/').pop().replace(/\.md$/, '');
+          a.href = 'docs.html?p=' + (name === 'SUPPORT' ? 'support' : name) + (hash ? '#' + hash : '');
+        });
+        const h1 = box.querySelector('h1');
+        if (h1) document.title = h1.textContent + ' | Velaine';
+        if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+      } catch (e) {
+        box.innerHTML = '<h1>Page not found</h1><p><a href="docs.html">Go to the documentation</a></p>';
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 ## What support covers
 
 - Questions about theme settings, sections and blocks.
-- Help setting up features described in the [documentation](docs/).
+- Help setting up features described in the [documentation](docs/README.md).
 - Bugs in the theme: broken layouts, dead links, features that don't work as documented.
 - Compatibility issues after Shopify platform changes.
 
