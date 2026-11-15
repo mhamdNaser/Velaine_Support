@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Velaine theme support</title>
+  <meta name="description" content="Documentation and support for the Velaine Shopify theme.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant:wght@500;600&family=DM+Sans:wght@400;500;600&display=swap">
+  <style>
+    :root { --black: #121212; --gold: #c2a06a; --bronze: #7d5f33; --cream: #f3eee7; --line: #e3dbcf; --ink: #1c1a17; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--cream); color: var(--ink); font: 16px/1.6 "DM Sans", system-ui, sans-serif; }
+    header { background: var(--black); color: var(--cream); text-align: center; padding: 56px 16px 48px; }
+    .mark { font: 600 64px/1 "Cormorant", Georgia, serif; color: var(--gold); }
+    .word { font: 500 40px/1.1 "Cormorant", Georgia, serif; letter-spacing: .12em; margin: 8px 0 4px; }
+    .tag { font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: #cfc6b8; }
+    main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+    h1, h2 { font-family: "Cormorant", Georgia, serif; font-weight: 600; color: var(--black); }
+    h2 { font-size: 30px; margin: 40px 0 8px; }
+    a { color: var(--bronze); }
+    .links { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+    .links a { display: block; padding: 16px; background: #fff; border: 1px solid var(--line); text-decoration: none; color: var(--black); font-weight: 600; }
+    .links a span { display: block; font-weight: 400; font-size: 14px; color: #4a453f; }
+    form { display: grid; gap: 16px; background: #fff; border: 1px solid var(--line); padding: 24px; }
+    .row { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+    label { display: grid; gap: 6px; font-weight: 600; font-size: 14px; }
+    input, textarea { font: inherit; padding: 12px; border: 1px solid #b9ae9e; background: #fff; color: var(--ink); border-radius: 0; }
+    input:focus-visible, textarea:focus-visible, button:focus-visible, a:focus-visible { outline: 2px solid var(--bronze); outline-offset: 2px; }
+    .hint { font-weight: 400; font-size: 13px; color: #4a453f; }
+    button { font: 600 14px/1 "DM Sans", sans-serif; letter-spacing: .15em; text-transform: uppercase; background: var(--black); color: var(--cream); border: 0; padding: 16px; cursor: pointer; }
+    button:hover { background: var(--bronze); }
+    footer { text-align: center; font-size: 13px; color: #4a453f; padding: 0 16px 40px; }
+    @media (max-width: 560px) { .row { grid-template-columns: 1fr; } .word { font-size: 32px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="mark" aria-hidden="true">V</div>
+    <div class="word">VELAINE</div>
+    <div class="tag">Shopify theme support</div>
+  </header>
+
+  <main>
+    <h1>How can we help?</h1>
+    <p>Start with the documentation. Most questions are answered in the FAQ. If you still need help, send us the form below and we will reply within 2 business days.</p>
+
+    <div class="links">
+      <a href="docs/">Documentation <span>Setup, settings, sections and pages</span></a>
+      <a href="docs/faq.html">FAQ <span>Common questions and fixes</span></a>
+      <a href="SUPPORT.html">Support policy <span>What support covers</span></a>
+    </div>
+
+    <h2 id="contact">Contact support</h2>
+    <form action="https://formsubmit.co/{{SUPPORT_EMAIL}}" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="Velaine support request">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_next" value="{{SITE_URL}}/thanks.html">
+      <input type="hidden" name="_autoresponse" value="Thanks for contacting Velaine support. We received your request and will reply within 2 business days. Before we reply, please check the FAQ: {{SITE_URL}}/docs/faq.html">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="row">
+        <label for="first-name">First name
+          <input id="first-name" name="first_name" autocomplete="given-name" required>
+        </label>
+        <label for="last-name">Last name
+          <input id="last-name" name="last_name" autocomplete="family-name" required>
+        </label>
+      </div>
+      <label for="email">Email
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </label>
+      <label for="store-url">Store URL
+        <span class="hint">For example, your-store.myshopify.com</span>
+        <input id="store-url" name="store_url" placeholder="your-store.myshopify.com" required>
+      </label>
+      <label for="subject">Subject <span class="hint">Optional</span>
+        <input id="subject" name="subject">
+      </label>
+      <label for="description">Describe the problem
+        <textarea id="description" name="description" rows="6" required></textarea>
+      </label>
+      <label for="attachment">Screenshots <span class="hint">Optional. Images help us find the problem faster.</span>
+        <input id="attachment" name="attachment" type="file" accept="image/*,.pdf">
+      </label>
+      <button type="submit">Send request</button>
+    </form>
+  </main>
+
+  <footer>Velaine is a Shopify theme. Support covers theme setup and bugs. Customizations are not included.</footer>
+</body>
+</html>
